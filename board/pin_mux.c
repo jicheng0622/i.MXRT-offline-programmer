@@ -65,10 +65,14 @@ BOARD_InitPins:
  *
  *END**************************************************************************/
 void BOARD_InitPins(void) {
+  CLOCK_EnableClock(kCLOCK_PortA);                           /* Port A Clock Gate Control: Clock enabled */
   CLOCK_EnableClock(kCLOCK_PortB);                           /* Port B Clock Gate Control: Clock enabled */
   CLOCK_EnableClock(kCLOCK_PortC);                           /* Port C Clock Gate Control: Clock enabled */
   CLOCK_EnableClock(kCLOCK_PortE);                           /* Port E Clock Gate Control: Clock enabled */
 
+  /* Disable NMI function on PTA4 */
+  PORT_SetPinMux(PORTA, 4u, kPORT_MuxAsGpio);                /* PTA4->GPIO */
+  
   /* LEDs */
   PORT_SetPinMux(PORTB, 21u, kPORT_MuxAsGpio);               /* PTB21->BLUE LED */
   PORT_SetPinMux(PORTB, 22u, kPORT_MuxAsGpio);               /* PTB22->RED LED */
