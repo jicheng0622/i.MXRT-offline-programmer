@@ -43,16 +43,16 @@ IAR for ARM v8.32
 
 ![image](https://github.com/jicheng0622/i.MXRT-offline-programmer/blob/master/picture/RT-UART.png)
 
-![image](https://github.com/jicheng0622/i.MXRT-offline-programmer/blob/master/picture/blsh-shell.png)
+![image](https://github.com/jicheng0622/i.MXRT-offline-programmer/blob/master/picture/connector.png)
 
 6. 一切准备就绪之后，将RT板子的启动模式拨码开关选择Serial Dowonloader模式并复位RT板子使其生效（这一步容易忽略哈，拨码配置之后必须硬件Reset下才会触发RT重新读取Boot配置），然后每次单击FRDM-K64板子上的SW2都会触发一次烧录流程，烧录过程中绿色LED快闪，如果中间有任何错误会红色LED常亮表明错误，此时重新点击SW2即可再次触发烧录流程；
 7. 除了点击SW2触发烧录之外，代码也保留了UART Shell控制台，当FRDM-K64的J26 USB调试端口插入PC的时候会虚拟一个串口出来（硬件与K64的UART0相连），打开Putty选择该COM口波特率设置为115200bps。通过该控制台可以独立触发SDP和BLHOST的命令，实际上单击SW2也可以通过该shell看到具体触发的命令，同时出现错误时也可以看到错误的原因；
 
-![image](https://github.com/jicheng0622/i.MXRT-offline-programmer/blob/master/picture/command.png)
+![image](https://github.com/jicheng0622/i.MXRT-offline-programmer/blob/master/picture/blsh-shell.png)
 
 8. 下面给出烧录SB文件一般需要的几条命令供参考，同时该shell也支持独立读写RT系列内部的eFuse（**另外,下面几条命令针对RT1050/RT1060有效，RT1020其sdp-write-file的地址要从0x20000000改成0x20208000，sdp-jump-address由0x20000400改成0x20208400**）。
 
-![1558353201188](C:\Users\nxa07165\AppData\Roaming\Typora\typora-user-images\1558353201188.png)
+![image](https://github.com/jicheng0622/i.MXRT-offline-programmer/blob/master/picture/command.png)
 
 ## 贡献者
 
