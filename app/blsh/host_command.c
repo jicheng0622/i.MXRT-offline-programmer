@@ -106,9 +106,9 @@ status_t handle_sdp_getstatus_command(uint32_t* result)
   {
      write_serial_data((uint8_t *)&sdp_frame_packet, sizeof(sdp_frame_packet));
      read_serial_data((uint8_t *)&recvHeader, 4);
-  }while (recvHeader != 0x56787856 && retry++ < 5);
+  }while (recvHeader != 0x56787856 && recvHeader != 0x12343412 && retry++ < 5);//0x12343412 for secury device ack
   
-  if (recvHeader != 0x56787856)
+  if (recvHeader != 0x56787856 && recvHeader != 0x12343412)
   {
      return kStatus_Fail;
   }
@@ -139,10 +139,10 @@ status_t handle_sdp_jumpAddress_command(uint32_t addr)
   {
      write_serial_data((uint8_t *)&sdp_frame_packet, sizeof(sdp_frame_packet));
      read_serial_data((uint8_t *)&recvHeader, 4);
-  }while (recvHeader != 0x56787856 && retry++ < 5);
+  }while (recvHeader != 0x56787856 && recvHeader != 0x12343412 && retry++ < 5);
 
   
-  if (recvHeader != 0x56787856)
+  if (recvHeader != 0x56787856 && recvHeader != 0x12343412)
   {
      return kStatus_Fail;
   }
@@ -171,9 +171,9 @@ status_t handle_sdp_readRegister_command(uint32_t addr, uint8_t * reg_data, uint
   {
      write_serial_data((uint8_t *)&sdp_frame_packet, sizeof(sdp_frame_packet));
      read_serial_data((uint8_t *)&recvHeader, 4);
-  }while (recvHeader != 0x56787856 && retry++ < 5);
+  }while (recvHeader != 0x56787856 && recvHeader != 0x12343412 && retry++ < 5);
   
-  if (recvHeader != 0x56787856)
+  if (recvHeader != 0x56787856 && recvHeader != 0x12343412)
   {
      return kStatus_Fail;
   }
@@ -205,9 +205,9 @@ status_t handle_sdp_writeRegister_command(uint32_t addr, uint32_t reg_data)
   {
     write_serial_data((uint8_t *)&sdp_frame_packet, sizeof(sdp_frame_packet));
     read_serial_data((uint8_t *)&recvHeader, 8);
-  }while (*((uint32_t*)recvHeader) != 0x56787856 && retry++ < 5);
+  }while (*((uint32_t*)recvHeader) != 0x56787856 && *((uint32_t*)recvHeader) != 0x12343412 && retry++ < 5);
 
-  if (*((uint32_t*)recvHeader) != 0x56787856)
+  if (*((uint32_t*)recvHeader) != 0x56787856 && *((uint32_t*)recvHeader) != 0x12343412)
   {
      return kStatus_Fail;
   }
@@ -282,10 +282,10 @@ status_t handle_sdp_writefile_command(uint32_t addr, const char* file_path)
   do
   {
      read_serial_data((uint8_t *)&recvHeader, 8);
-  }while (*((uint32_t*)recvHeader) != 0x56787856);
+  }while (*((uint32_t*)recvHeader) != 0x56787856 && *((uint32_t*)recvHeader) != 0x12343412);
 #endif   
  
-  if ((*((uint32_t*)recvHeader) != 0x56787856) && (*((uint32_t*)(recvHeader+4)) != 0x88888888) )
+  if (*((uint32_t*)recvHeader) != 0x56787856 && *((uint32_t*)recvHeader) != 0x12343412 && (*((uint32_t*)(recvHeader+4)) != 0x88888888) )
   {
      return kStatus_Fail;
   }

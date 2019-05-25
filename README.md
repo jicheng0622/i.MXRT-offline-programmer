@@ -3,9 +3,13 @@
 
 ## 版本信息
 
-v1.0--2019.05.18
+v1.0.0--2019.05.18
 
 第一个版本，功能工作正常，仅支持UART boot升级；
+
+v1.0.1--2019.05.25
+
+修正下载HAB Enabled Signed SB文件的bug，验证烧写signed flashloader和signed sb文件成功；
 
 ## 支持的芯片型号
 

@@ -36,7 +36,7 @@ void BTN1_PRESS_UP_Handler(void* btn)
     goto error_handler;
   if(kStatus_Success != sdp_jump_address_func(2, sdp_jump_address_RT1050_1060))
     goto error_handler;
-  vTaskDelay(100);//Reserve some time to wait BLHOST to run
+  vTaskDelay(500);//Reserve enough time to wait BLHOST to run(expeciall for security flashloader)
   if(kStatus_Success != get_property_func(2, blhost_get_property))
     goto error_handler;
   if(kStatus_Success != receive_sb_file_func(2, blhost_receive_sb_file))
